@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "ENABLE_FILE_SYSTEM_API": "1",
+      "MONGODB_URL": "mongodb+srv://guest:5CcALvh5hqbaEWnS@cluster0.37ogv.mongodb.net/codesaver"
+    }
+  }
+}
