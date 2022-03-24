@@ -76,7 +76,9 @@ const Layout: React.FC = ({ children }) => {
           ))}
         </nav>
         <footer>
-          <button className="btn">Add Snippet</button>
+          <Link to="/new" className="btn">
+            Add Snippet
+          </Link>
         </footer>
       </aside>
       {children}

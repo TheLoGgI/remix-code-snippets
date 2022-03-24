@@ -1,0 +1,29 @@
+.snippet-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-form {
+  width: 800px;
+}
+
+.input-field {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.input-field + .input-field {
+  margin-bottom: 1rem;
+}
+
+.input-field input,
+.input-field select,
+.input-field textarea {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.input-field textarea {
+  font-family: consolas, monospace;
+}

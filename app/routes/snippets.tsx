@@ -4,7 +4,7 @@ import { Link, LoaderFunction, Outlet, useLoaderData } from "remix"
 
 import styles from "../styles/snippets.css"
 
-export type Snippet = {
+export type SnippetType = {
   _id: string
   language: string
   description: string
@@ -12,6 +12,8 @@ export type Snippet = {
   title: string
   favorite: boolean
 }
+
+type LoaderDataType = { query: SnippetType[]; params: { snippet: string } }
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }]
@@ -21,33 +23,34 @@ export const loader: LoaderFunction = async ({ params }) => {
   const db = await connect()
 
   // Find all snippets with the language specified in the URL
-  const query = await db.models.Snippets.find()
+  const query = await db.models.Snippets.find({ language: params.language })
 
   return { params, query }
 }
 
-export const SnippetContext = createContext<Snippet>({} as Snippet)
+export const SnippetContext = createContext<SnippetType>({} as SnippetType)
 
 export default function Snippets() {
-  const { query: snippets } =
-    useLoaderData<{ query: Snippet[]; params: string[] }>()
+  const { query: snippets } = useLoaderData<LoaderDataType>()
+  // const snippet = snippets.find((snippet) => snippet._id === params.snippet)
+  // console.log("snippet: ", snippet)
 
   return (
-    <SnippetContext.Provider value={snippets[0]}>
-      <section className="snippet-grid">
-        <div className="snippet-list">
-          {snippets.map((snippet) => (
-            <Link key={snippet._id} to={`${snippet._id}`}>
-              <div className="snippet-list-item">
-                <p className="description">{snippet.description}</p>
-                <p className="short-snippet">{snippet.snippet}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="seperator"></div>
-        <Outlet />
-      </section>
-    </SnippetContext.Provider>
+    // <SnippetContext.Provider value={snippet}>
+    <section className="snippet-grid">
+      <div className="snippet-list">
+        {snippets.map((snippet) => (
+          <Link key={snippet._id} to={`${snippet.language}/${snippet._id}`}>
+            <div className="snippet-list-item">
+              <p className="description">{snippet.description}</p>
+              <p className="short-snippet">{snippet.snippet}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div className="seperator"></div>
+      <Outlet />
+    </section>
+    // </SnippetContext.Provider>
   )
 }

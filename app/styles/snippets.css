@@ -20,14 +20,22 @@
   list-style: none;
   max-width: 500px;
   margin: 2rem auto;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
 }
 
 .snippet-list .snippet-list-item {
   padding: 1rem;
   display: inline-block;
-  border: 2px solid black;
+  border: 1px solid rgb(71, 71, 71);
   max-width: 500px;
   color: black;
+  width: 100%;
+}
+
+.snippet-list-item:hover {
+  background: rgb(227, 228, 233);
 }
 
 .snippet-list-item .description {
@@ -47,6 +55,7 @@
   width: 600px;
   display: flex;
   flex-flow: column nowrap;
+  margin: 0 auto;
 }
 
 code {
@@ -66,4 +75,17 @@ pre {
   justify-content: space-between;
   align-items: center;
   margin-top: 2rem;
+}
+
+.snippet-fallback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.snippet-fallback p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
 }
