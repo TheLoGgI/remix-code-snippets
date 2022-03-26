@@ -12,6 +12,23 @@
   height: 100vh;
 }
 
+.input-search {
+  background-color: white;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  /* border-radius: 0.5rem; */
+  font-size: 1rem;
+}
+
+.input-search input {
+  border: none;
+  display: inline-block;
+  width: 100%;
+  padding: 0.5rem;
+}
+
 .aside-nav header {
   padding: 1rem;
   background: #8daae2;
@@ -23,6 +40,13 @@
   overflow-y: auto;
   width: 100%;
   margin: auto 0 auto 0;
+}
+
+.aside-nav .active {
+  /* content: ; */
+  color: #1d71de;
+  font-weight: bold;
+  border-bottom: 2px solid #1d71de;
 }
 
 .aside-nav nav a {
@@ -54,7 +78,6 @@
 
 .btn {
   background-color: #1d71de;
-  width: 100%;
   padding: 1rem;
   border: none;
   color: white;

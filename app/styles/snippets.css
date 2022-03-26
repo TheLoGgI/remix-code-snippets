@@ -3,6 +3,7 @@
   align-items: center;
   grid-template-columns: 1fr 1px 1fr;
   gap: 2rem;
+  margin-inline: 2rem;
 }
 
 .seperator {
@@ -18,33 +19,52 @@
 
 .snippet-list {
   list-style: none;
-  max-width: 500px;
   margin: 2rem auto;
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;
 }
 
-.snippet-list .snippet-list-item {
-  padding: 1rem;
+.snippet-card {
   display: inline-block;
+}
+
+.snippet-selected {
+  border: 1px solid #1d71de;
+  color: #1d71de;
+  transition: transform 0.2s ease-in-out;
+  transform: translateX(2rem);
+}
+.snippet-selected .snippet-card-content {
+  color: #1d71de;
+}
+
+.snippet-card-content {
+  display: grid;
+  grid-template-columns: 90% 50px;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
   border: 1px solid rgb(71, 71, 71);
-  max-width: 500px;
   color: black;
+  width: 600px;
+}
+
+.snippet-list .snippet-list-item {
   width: 100%;
 }
 
-.snippet-list-item:hover {
+.snippet-card:hover {
   background: rgb(227, 228, 233);
 }
 
-.snippet-list-item .description {
+.snippet-card .description {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-.snippet-list-item .short-snippet {
+.snippet-card .short-snippet {
   overflow: hidden;
   font-style: italic;
   text-overflow: ellipsis;
@@ -58,16 +78,33 @@
   margin: 0 auto;
 }
 
+.snippet-section header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-favorite button[type="submit"] {
+  background-color: initial;
+  border: none;
+  cursor: pointer;
+}
+.form-favorite button[type="submit"] svg:hover path {
+  fill: #f6ea7a;
+  stroke: #d2c974;
+}
+
 code {
-  background-color: lightblue;
-  padding: 1rem;
   border-radius: 5px;
   width: 100%;
-  margin-top: 2rem;
+
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 pre {
   display: inline-block;
+  white-space: pre-wrap;
 }
 
 .snippet-section footer {
@@ -84,8 +121,38 @@ pre {
   text-align: center;
 }
 
+.snippet-fallback img {
+  max-width: 100%;
+}
+
 .snippet-fallback p {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 2rem;
+}
+
+.clipboard-banner {
+  background-color: #d4f1fb;
+  width: 50px;
+  height: 60px;
+  padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  border-radius: 0 0 5px 5px;
+}
+
+.code-snippet {
+  position: relative;
+  background-color: lightblue;
+  padding: 1rem;
+  margin-top: 2rem;
+  cursor: copy;
+}
+
+.clipboard-banner:hover {
+  background-color: #e5f8ff;
+}
+.clipboard-banner svg:hover path {
+  fill: #1d9dcc;
 }

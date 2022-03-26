@@ -1,8 +1,14 @@
 import connect from "~/database/mongoConnection"
-import React from "react"
-import { ActionFunction, Form, redirect } from "remix"
+import styles from "~/styles/new.css"
+import {
+  ActionFunction,
+  Form,
+  LoaderFunction,
+  redirect,
+  useLoaderData,
+} from "remix"
 
-import styles from "../styles/new.css"
+import { SnippetType } from "../snippets"
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }]
@@ -18,39 +24,47 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   const db = await connect()
-  const newSnippet = new db.models.Snippets(doc)
+  const updatedSnippet = await db.models.Snippets.findByIdAndUpdate(
+    form.get("id"),
+    doc
+  )
 
   try {
-    await newSnippet.save()
-    return redirect(`/snippets/${newSnippet.language}/${newSnippet._id}`)
+    await updatedSnippet.save()
+    return redirect(
+      `/snippets/${updatedSnippet.language}/${updatedSnippet._id}`
+    )
   } catch (error) {
     return redirect(`/snippet/}`)
   }
 }
 
-export default function New() {
-  const [language, setLangauge] = React.useState("javascript")
+export const loader: LoaderFunction = async ({ params }) => {
+  const db = await connect()
+
+  return await db.models.Snippets.findOne({ _id: params.snippet })
+}
+
+export default function Edit() {
+  const snippet = useLoaderData<SnippetType>()
+
   return (
-    <section className="snippet-add">
+    <section className="snippet-edit">
       <Form method="post" className="new-form">
+        <input type="hidden" name="id" value={snippet._id} />
         <div className="input-field">
           <label htmlFor="title">Title</label>
           <input
             type="text"
             name="title"
-            required
             id="title"
+            defaultValue={snippet.title}
             className="border p-1 border-gray-200 w-full"
           />
         </div>
         <div className="input-field">
           <label htmlFor="language">Language</label>
-          <select
-            name="language"
-            id="language"
-            required
-            onChange={(e) => setLangauge(e.target.value)}
-          >
+          <select name="language" id="language" defaultValue={snippet.language}>
             <option value="javascript">Javascript</option>
             <option value="java">Java</option>
             <option value="ruby">Ruby</option>
@@ -67,7 +81,7 @@ export default function New() {
             <option value="sql">SQL</option>
             <option value="perl">Perl</option>
             <option value="swift">Swift</option>
-            <option value="cs">C#</option>
+            <option value="c#">C#</option>
             <option value="c++">C++</option>
             <option value="python">Python</option>
           </select>
@@ -76,8 +90,8 @@ export default function New() {
           <label htmlFor="description">Description</label>
           <input
             type="text"
-            required
             name="description"
+            defaultValue={snippet.description}
             id="description"
             className="border p-1 border-gray-200 w-full"
           />
@@ -89,11 +103,11 @@ export default function New() {
             id="snippet"
             rows={20}
             cols={30}
-            required
+            defaultValue={snippet.snippet}
           ></textarea>
         </div>
 
-        <input className="btn" type="submit" value="Add new snippet" />
+        <input className="btn" type="submit" value="Update snippet" />
       </Form>
     </section>
   )
