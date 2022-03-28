@@ -1,6 +1,7 @@
 import ClipboardIcon from "~/components/clipboardIcon"
 import StarIcon from "~/components/starIcon"
 import connect from "~/database/mongoConnection"
+import Highlight from "react-highlight"
 import {
   ActionFunction,
   Form,
@@ -11,8 +12,6 @@ import {
 } from "remix"
 
 import { SnippetType } from "../snippets"
-
-// type requestWithURL = request & { parsedURL: URL }
 
 export const action: ActionFunction = async ({ request }) => {
   const db = await connect()
@@ -54,10 +53,6 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function Snippet() {
   const snippet = useLoaderData<SnippetType>()
-  let isJavascriptEnabled = false
-  if (isJavascriptEnabled === false) {
-    isJavascriptEnabled = true
-  }
 
   return (
     <section className="snippet-section">
@@ -91,9 +86,7 @@ export default function Snippet() {
           <ClipboardIcon />
         </div>
 
-        <code>
-          <pre>{snippet.snippet}</pre>
-        </code>
+        <Highlight className={snippet.language}>{snippet.snippet}</Highlight>
       </div>
       <footer>
         <Form method="post">

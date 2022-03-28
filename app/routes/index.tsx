@@ -22,11 +22,10 @@ export function links() {
 //   return redirect(redirectTo as string)
 // }
 
-export const loader: LoaderFunction = async ({ params, request }) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const db = await connect()
   const url = new URL(request.url)
   const urlQuery = url.searchParams.get("q")
-  console.log("urlQuery: ", urlQuery)
 
   // Search for titles or descriptions that contain the query
   const language = await db.models.Snippets.find({ language: urlQuery })
@@ -57,7 +56,6 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
 export default function Index() {
   const snippets = useLoaderData<SnippetType[]>()
-  console.log("request: ", snippets)
 
   return (
     <section className="search-results">

@@ -16,6 +16,7 @@ import {
 } from "remix"
 import type { MetaFunction } from "remix"
 
+import highlightStylesLight from "./styles/github.min.css"
 import styles from "./styles/main.css"
 
 export async function loader(): Promise<string[]> {
@@ -25,7 +26,10 @@ export async function loader(): Promise<string[]> {
 }
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }]
+  return [
+    { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: highlightStylesLight },
+  ]
 }
 
 export const meta: MetaFunction = () => ({
