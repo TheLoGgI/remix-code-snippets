@@ -52,7 +52,7 @@ export default function New() {
             <option value="java">Java</option>
             <option value="ruby">Ruby</option>
             <option value="haskel">Haskel</option>
-            <option value="coffescript">CoffeScript</option>
+            <option value="coffeescript">CoffeeScript</option>
             <option value="haskell">Haskell</option>
             <option value="kotlin">Kotlin</option>
             <option value="dart">Dart</option>

@@ -93,6 +93,7 @@ const Layout: React.FC = ({ children }) => {
           </div>
         </Form>
         <nav>
+          {/* TODO: create an all snippets page */}
           <Link
             to={`/snippets/all`}
             className={

@@ -4,6 +4,8 @@ node_modules
 .env
 .vercel
 .output
+*.pdf
+*.zip
 
 /build/
 /public/build
