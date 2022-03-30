@@ -55,6 +55,7 @@
   display: block;
   padding: 1rem;
   transition: all 0.1s linear;
+  text-transform: capitalize;
   border-bottom: 1px solid #dadde1;
 }
 .aside-nav nav a:hover {

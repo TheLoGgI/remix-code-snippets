@@ -9,53 +9,26 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }]
 }
 
-// export const action: ActionFunction = async ({ request }) => {
-//   const db = await connect()
-//   console.log("request: ", request)
-//   const formData = await request.formData()
-//   console.log("formData: ", formData)
-//   console.log("formData.get(: ", formData.get("id"))
-//   console.log("formData.get(: ", formData.get("redirectTo"))
-
-//   await db.models.Snippets.findByIdAndRemove(formData.get("id"))
-//   const redirectTo = formData.get("redirectTo") || "/snippets"
-//   return redirect(redirectTo as string)
-// }
-
 export const loader: LoaderFunction = async ({ request }) => {
   const db = await connect()
   const url = new URL(request.url)
-  const urlQuery = url.searchParams.get("q")
+  const urlQuery = url.searchParams.get("q") || ""
 
   // Search for titles or descriptions that contain the query
-  const language = await db.models.Snippets.find({ language: urlQuery })
-  const title = await db.models.Snippets.find({ title: /urlQuery/gi })
+  const language = await db.models.Snippets.find({
+    language: new RegExp(urlQuery, "i"),
+  })
+  const title = await db.models.Snippets.find({
+    title: new RegExp(urlQuery, "i"),
+  })
   //  TODO: Implement this with mongo agregate query / Atlas Search
 
   return [...language, ...title]
-
-  // const pipeline = db.models.Snippets.aggregate().match({ language: 1 })
-  // console.log('pipeline: ', pipeline);
-  // const res = await db.models.Snippets.aggregate().search({
-  //   text: {
-  //     query: `${urlQuery}`,
-  //     path: {
-  //       wildcard: "*",
-  //     },
-  //   },
-  // })
-
-  // const queryResponse = await db.models.Snippets.find({
-  //   // _id: urlQuery,
-  //   language: urlQuery,
-  //   // title: urlQuery,
-  //   // description: urlQuery,
-  //   // snippet: urlQuery,
-  // })
 }
 
 export default function Index() {
   const snippets = useLoaderData<SnippetType[]>()
+  console.log("snippets: ", snippets)
 
   return (
     <section className="search-results">

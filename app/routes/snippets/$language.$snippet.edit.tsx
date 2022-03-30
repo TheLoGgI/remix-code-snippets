@@ -21,6 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
     language: form.get("language"),
     description: form.get("description"),
     snippet: form.get("snippet"),
+    updatedAt: new Date(),
   }
 
   const db = await connect()

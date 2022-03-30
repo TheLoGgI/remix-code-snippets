@@ -1,3 +1,4 @@
+import EmptyState from "~/components/emptyState"
 import SnippetCard from "~/components/snippetCard"
 import connect from "~/database/mongoConnection"
 import React, { useEffect } from "react"
@@ -6,7 +7,9 @@ import {
   Form,
   LoaderFunction,
   Outlet,
+  json,
   redirect,
+  useCatch,
   useFetcher,
   useLoaderData,
   useLocation,
@@ -21,6 +24,8 @@ export type SnippetType = {
   snippet: string
   title: string
   favorite: boolean
+  createdAt: Date
+  updatedAt: Date
 }
 
 type LoaderDataType = { query: SnippetType[]; params: { snippet: string } }
@@ -37,6 +42,8 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (actionType === "sort") {
     switch (sortId) {
+      case "upd":
+        return redirect(`${pathname}?sort=updatedAt`)
       case "fav":
         return redirect(`${pathname}?sort=favorite`)
       default:
@@ -48,38 +55,33 @@ export const action: ActionFunction = async ({ request }) => {
 export const loader: LoaderFunction = async ({ params, request }) => {
   console.log("request: ", request)
   const url = new URL(request.url)
-  const sortQury = url.searchParams.get("sort")
-  console.log("sortQury: ", sortQury)
+  const sortQury = url.searchParams.get("sort") || "title"
 
   const db = await connect()
 
+  const sortObject = {
+    [sortQury]: 1,
+  }
   // Find all snippets with the language specified in the URL
   const query = await db.models.Snippets.find({
     language: params.language,
-  }).sort(sortQury === "title" ? { title: 1 } : { favorite: 1 })
+  }).sort(sortObject)
+
+  // Catch error and sent to CatchBoundary
+  if (query.length === 0) {
+    throw new Response("Not Found", {
+      status: 404,
+      statusText: "No snippets found for this language",
+    })
+  }
 
   return { params, query }
 }
 
 export default function Snippets() {
   const { query: snippets } = useLoaderData<LoaderDataType>()
-  console.log("snippets: ", snippets)
   const fetcher = useFetcher()
-  // const [snippetsState, setSnippetState] = React.useState<SnippetType[]>(snippets)
   const location = useLocation()
-  console.log("location: ", location)
-
-  // useEffect(() => {
-  //   console.log("fetcher: ", fetcher)
-  //   // if (fetcher.submission) {
-  //   // const sortType = fetcher.submission?.formData.get('sort')
-  //   fetcher.submit(fetcher.data, {
-  //     method: "post",
-  //   })
-  //   fetcher.load(location.pathname)
-
-  //   // }
-  // }, [fetcher, location.pathname])
 
   return (
     <section className="snippet-grid">
@@ -97,6 +99,7 @@ export default function Snippets() {
                 Sort Snippets
               </option>
               <option value="tit">Title</option>
+              <option value="upd">Last updated</option>
               <option value="fav">Favorite</option>
             </select>
             <input type="hidden" name="pathname" value={location.pathname} />
@@ -117,6 +120,36 @@ export default function Snippets() {
       </div>
       <div className="seperator"></div>
       <Outlet />
+    </section>
+  )
+}
+
+// export function ErrorBoundary({ error }: { error: any }) {
+//   console.error(error)
+//   return (
+//     <html>
+//       <head>
+//         <title>Oh no!</title>
+//         {/* <Meta />
+//         <Links /> */}
+//       </head>
+//       <body>
+//         <p>{error.msg}</p>
+//       </body>
+//     </html>
+//   )
+// }
+
+export function CatchBoundary() {
+  const caught = useCatch()
+  console.log("caught: ", caught)
+
+  return (
+    <section className="error-msg">
+      <div className="center">
+        <h1>{caught.statusText}</h1>
+        <EmptyState className="error-empty" />
+      </div>
     </section>
   )
 }

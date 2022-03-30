@@ -1,6 +1,7 @@
 import ClipboardIcon from "~/components/clipboardIcon"
 import StarIcon from "~/components/starIcon"
 import connect from "~/database/mongoConnection"
+import { useEffect, useState } from "react"
 import Highlight from "react-highlight"
 import {
   ActionFunction,
@@ -53,6 +54,12 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function Snippet() {
   const snippet = useLoaderData<SnippetType>()
+  console.log("snippet: ", snippet)
+  const [showCopy, setShowCopy] = useState(false)
+
+  useEffect(() => {
+    setShowCopy(true)
+  }, [])
 
   return (
     <section className="snippet-section">
@@ -60,7 +67,6 @@ export default function Snippet() {
         <div>
           <h2>{snippet.title}</h2>
           <p>{snippet.description}</p>
-          <noscript>Your browser does not support JavaScript!</noscript>
         </div>
         <Form method="post" className="form-favorite">
           <input type="hidden" name="id" value={snippet._id} />
@@ -74,17 +80,27 @@ export default function Snippet() {
           </button>
         </Form>
       </header>
+      <div className="snippet-date">
+        {snippet.createdAt &&
+          `created at: ${new Date(
+            snippet.createdAt
+          ).toLocaleDateString()}`}{" "}
+        {snippet.updatedAt &&
+          `updated at: ${new Date(snippet.updatedAt).toLocaleDateString()}`}
+      </div>
       <div className="code-snippet">
-        <div
-          className="clipboard-banner"
-          title="Copy to Clipboard"
-          onClick={() => {
-            console.log("snippet.snippet: ", snippet.snippet)
-            navigator.clipboard.writeText(snippet.snippet)
-          }}
-        >
-          <ClipboardIcon />
-        </div>
+        {showCopy && (
+          <div
+            className="clipboard-banner"
+            title="Copy to Clipboard"
+            onClick={() => {
+              console.log("snippet.snippet: ", snippet.snippet)
+              navigator.clipboard.writeText(snippet.snippet)
+            }}
+          >
+            <ClipboardIcon />
+          </div>
+        )}
 
         <Highlight className={snippet.language}>{snippet.snippet}</Highlight>
       </div>

@@ -128,6 +128,7 @@ pre {
   display: inline-block;
   white-space: pre-wrap;
   width: 100%;
+  padding: 1rem;
 }
 
 .snippet-section footer {
@@ -171,6 +172,11 @@ pre {
   cursor: copy;
 }
 
+.snippet-date {
+  color: gray;
+  margin-top: 0.5rem;
+}
+
 .clipboard-banner:hover {
   background-color: #e5f8ff;
 }
@@ -178,9 +184,28 @@ pre {
   fill: #1d9dcc;
 }
 
-.hljs {
+.hljs,
+.code-snippet {
   background-color: lightblue;
 }
 
-@media screen {
+.error-msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-empty {
+  width: 400px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Handling inconsistent padding with hljs */
+pre code.hljs {
+  padding: 0;
 }

@@ -6,6 +6,8 @@ export type Snippet = {
   snippet: string
   description: string
   favorite: boolean
+  createdAt: Date
+  updatedAt: Date
 }
 
 const snippet = new Schema<Snippet>({
@@ -27,6 +29,14 @@ const snippet = new Schema<Snippet>({
   },
   favorite: {
     type: Boolean,
+    required: false,
+  },
+  createdAt: {
+    type: Date,
+    required: false,
+  },
+  updatedAt: {
+    type: Date,
     required: false,
   },
 })

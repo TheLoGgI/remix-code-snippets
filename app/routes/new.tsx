@@ -10,11 +10,14 @@ export function links() {
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
+
   const doc = {
     title: form.get("title"),
     language: form.get("language"),
     description: form.get("description"),
     snippet: form.get("snippet"),
+    creadedAt: new Date(),
+    updatedAt: new Date(),
   }
 
   const db = await connect()
@@ -29,7 +32,6 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function New() {
-  const [language, setLangauge] = React.useState("javascript")
   return (
     <section className="snippet-add">
       <Form method="post" className="new-form">
@@ -45,12 +47,7 @@ export default function New() {
         </div>
         <div className="input-field">
           <label htmlFor="language">Language</label>
-          <select
-            name="language"
-            id="language"
-            required
-            onChange={(e) => setLangauge(e.target.value)}
-          >
+          <select name="language" id="language" required>
             <option value="javascript">Javascript</option>
             <option value="java">Java</option>
             <option value="ruby">Ruby</option>

@@ -72,7 +72,6 @@ const Document: React.FC = ({ children }) => {
 
 const Layout: React.FC = ({ children }) => {
   const languages = useLoaderData<string[]>() || []
-  // window.location.pathname not not valid in this context
   const location = useLocation()
 
   return (
@@ -94,6 +93,14 @@ const Layout: React.FC = ({ children }) => {
           </div>
         </Form>
         <nav>
+          <Link
+            to={`/snippets/all`}
+            className={
+              new RegExp(`/all`).test(location.pathname) ? "active" : ""
+            }
+          >
+            all languages
+          </Link>
           {languages.map((language) => {
             return (
               <Link
