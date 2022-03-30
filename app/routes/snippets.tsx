@@ -53,7 +53,6 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export const loader: LoaderFunction = async ({ params, request }) => {
-  console.log("request: ", request)
   const url = new URL(request.url)
   const sortQury = url.searchParams.get("sort") || "title"
 
@@ -142,7 +141,6 @@ export default function Snippets() {
 
 export function CatchBoundary() {
   const caught = useCatch()
-  console.log("caught: ", caught)
 
   return (
     <section className="error-msg">

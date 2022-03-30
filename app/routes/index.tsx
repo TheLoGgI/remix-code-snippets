@@ -28,7 +28,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Index() {
   const snippets = useLoaderData<SnippetType[]>()
-  console.log("snippets: ", snippets)
 
   return (
     <section className="search-results">

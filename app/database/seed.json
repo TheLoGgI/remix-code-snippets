@@ -1,0 +1,278 @@
+[
+  {
+    "_id": "623ed6995c92f21ac3bdfb13",
+    "title": "System info",
+    "language": "haskell",
+    "snippet": "import System.Info\n\nmain = do\n    print os\n    print arch\n    print compilerName\n    print compilerVersion",
+    "description": "Displays System info",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0,
+    "favorite": true
+  },
+  {
+    "_id": "623ed6b85c92f21ac3bdfb18",
+    "title": "Yesod application",
+    "language": "haskell",
+    "snippet": "{-# LANGUAGE OverloadedStrings #-}\n{-# LANGUAGE TypeFamilies #-}\n{-# LANGUAGE QuasiQuotes #-}\n{-# LANGUAGE TemplateHaskell #-}\n{-# LANGUAGE MultiParamTypeClasses #-}\n\nimport Yesod\n\ndata WebApp = WebApp\n\ninstance Yesod WebApp\n\nmkYesod \"WebApp\" [parseRoutes|\n  / HomeR GET\n|]\n\ngetHomeR = defaultLayout [whamlet|\n  <div>Hello, world!\n|]\n\nmain = warpEnv WebApp",
+    "description": "Builiding Yesod application",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "623ed6d15c92f21ac3bdfb1d",
+    "title": "Lists",
+    "language": "haskell",
+    "snippet": "list = [1, 2, 3, 4, 5]\n\nmain = do\n    print list\n\n    print $ head list\n    print $ tail list\n    print $ last list\n    print $ init list\n\n    print $ list !! 3\n    print $ elem 3 list\n",
+    "description": "Printing lists",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "623f9199b1c3b46b0d768ef0",
+    "title": "Console log",
+    "language": "javascript",
+    "snippet": "console.log(\"Hello World!\")",
+    "description": "Logging in javascript",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0,
+    "favorite": true
+  },
+  {
+    "_id": "623f949eb1c3b46b0d768f40",
+    "title": "Debug logging",
+    "language": "cs",
+    "snippet": "Debug.log(\"Hello World!\");",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "description": "Debug logging cs",
+    "__v": 0
+  },
+  {
+    "_id": "623f954cb1c3b46b0d768f60",
+    "title": "Logging Ruby",
+    "language": "ruby",
+    "snippet": "require \"logger\"\r\nlogger = Logger.new(STDOUT)\r\nlogger.debug(\"Hello World!\")\r\nlogger.debug(\"Hello World!\")\r\nlogger.debug(\"Hello World!\")",
+    "description": "Log Hello World in ruby",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0,
+    "favorite": true
+  },
+  {
+    "_id": "623f9687b1c3b46b0d768fa2",
+    "title": "Logging in Go",
+    "language": "go",
+    "snippet": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"hello world\")\n}",
+    "description": "Print Hello World",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "6241d2b2dc3dfdfa9857bcd5",
+    "title": "Export loader module",
+    "language": "javascript",
+    "snippet": "export const loader: LoaderFunction = async ({ params }) => {\n  const db = await connect()\n\n  const query = await db.models.Snippets.findOne({ _id: params.snippet })\n\n  return query\n}",
+    "description": "loader from remix",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "624450f6009f4f44042f3f95",
+    "title": "Taking Space Separated Multiple Inputs",
+    "language": "python",
+    "snippet": "## Taking Two Integers as input\na,b = map(int,input().split())\nprint(\"a:\",a)\nprint(\"b:\",b)\n\n## Taking a List as input\narr = list(map(int,input().split()))\nprint(\"Input List:\",arr)",
+    "description": "This code snippet let’s you take multiple space-separated inputs at one time. This snippet will come in handy whenever you are solving a programming competition question.",
+    "updatedAt": "2022-03-30T12:45:42.524Z",
+    "__v": 0
+  },
+  {
+    "_id": "624451fb009f4f44042f3fa6",
+    "title": " Accessing Index and Value at the Same Time",
+    "language": "python",
+    "snippet": "arr = [2,4,6,3,8,10]\n\nfor index,value in enumerate(arr):\n  print(f\"At Index {index} The Value Is -> {value}\")\n\n'''Output\nAt Index 0 The Value Is -> 2\nAt Index 1 The Value Is -> 4\nAt Index 2 The Value Is -> 6\nAt Index 3 The Value Is -> 3\nAt Index 4 The Value Is -> 8\nAt Index 5 The Value Is -> 10",
+    "description": "enumerate() inbuilt function lets you access index and value at the same time within a or loop.",
+    "updatedAt": "2022-03-30T12:50:03.202Z",
+    "__v": 0
+  },
+  {
+    "_id": "624454f7009f4f44042f3fb6",
+    "title": "Check for an Anagram ----",
+    "language": "python",
+    "snippet": "def check_anagram(first_word, second_word):\n  return sorted(first_word) == sorted(second_word)\n  \nprint(check_anagram(\"silent\", \"listen\"))   # True\nprint(check_anagram(\"ginger\", \"danger\"))   # False",
+    "description": "An anagram is a word that is formed by rearranging the letters of a different word, using all the original letters exactly once.",
+    "__v": 0,
+    "updatedAt": "2022-03-30T13:03:54.402Z"
+  },
+  {
+    "_id": "6244557a009f4f44042f3fc4",
+    "title": "Square of all numbers in a given range",
+    "language": "python",
+    "snippet": "# METHOD 1\nfrom itertools import repeat\n\nn = 5\nsquares = list(map(pow, range(1, n+1), repeat(2)))\nprint(squares)\n\n# METHOD 2\nn = 6\nsquares = [i**2 for i in range(1,n+1)]\nprint(squares)\n\n\n\"\"\"Output\n  [1, 4, 9, 16, 25]\n\"\"\"",
+    "description": "In this snippet, we take the help of inbuilt function itertools to find the square of every integer in a given range.",
+    "updatedAt": "2022-03-30T13:04:58.954Z",
+    "__v": 0
+  },
+  {
+    "_id": "624455d4009f4f44042f3fcc",
+    "title": "Simple stack",
+    "language": "lua",
+    "snippet": "-- Stack Table\n-- Uses a table as stack, use <table>:push(value) and <table>:pop()\n-- Lua 5.1 compatible\n\n-- GLOBAL\nStack = {}\n\n-- Create a Table with stack functions\nfunction Stack:Create()\n\n  -- stack table\n  local t = {}\n  -- entry table\n  t._et = {}\n\n  -- push a value on to the stack\n  function t:push(...)\n    if ... then\n      local targs = {...}\n      -- add values\n      for _,v in ipairs(targs) do\n        table.insert(self._et, v)\n      end\n    end\n  end\n\n  -- pop a value from the stack\n  function t:pop(num)\n\n    -- get num values from stack\n    local num = num or 1\n\n    -- return table\n    local entries = {}\n\n    -- get values into entries\n    for i = 1, num do\n      -- get last entry\n      if #self._et ~= 0 then\n        table.insert(entries, self._et[#self._et])\n        -- remove last value\n        table.remove(self._et)\n      else\n        break\n      end\n    end\n    -- return unpacked entries\n    return unpack(entries)\n  end\n\n  -- get entries\n  function t:getn()\n    return #self._et\n  end\n\n  -- list values\n  function t:list()\n    for i,v in pairs(self._et) do\n      print(i, v)\n    end\n  end\n  return t\nend\n\n-- CHILLCODE™",
+    "description": "The following is a simple implementation of a stack via a Lua table. The function Stack:Create() will return a table with stack like functions such as pop and push. Multiple elements can be pushed/pop in a single call.",
+    "updatedAt": "2022-03-30T13:06:28.244Z",
+    "__v": 0
+  },
+  {
+    "_id": "6244572b009f4f44042f3fda",
+    "title": "fgfdsggfds",
+    "language": "coffescript",
+    "snippet": "sfdgsfgdsgdfdfgsgsfd",
+    "description": "fdgsgfdsgfds",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "6244572e009f4f44042f3fdf",
+    "title": "fgfdsggfds",
+    "language": "coffescript",
+    "snippet": "sfdgsfgdsgdfdfgsgsfd",
+    "description": "fdgsgfdsgfds",
+    "updatedAt": "2022-03-30T13:12:14.844Z",
+    "__v": 0
+  },
+  {
+    "_id": "623ed6995c92f21ac3bdfb13",
+    "title": "System info",
+    "language": "haskell",
+    "snippet": "import System.Info\n\nmain = do\n    print os\n    print arch\n    print compilerName\n    print compilerVersion",
+    "description": "Displays System info",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0,
+    "favorite": true
+  },
+  {
+    "_id": "623ed6b85c92f21ac3bdfb18",
+    "title": "Yesod application",
+    "language": "haskell",
+    "snippet": "{-# LANGUAGE OverloadedStrings #-}\n{-# LANGUAGE TypeFamilies #-}\n{-# LANGUAGE QuasiQuotes #-}\n{-# LANGUAGE TemplateHaskell #-}\n{-# LANGUAGE MultiParamTypeClasses #-}\n\nimport Yesod\n\ndata WebApp = WebApp\n\ninstance Yesod WebApp\n\nmkYesod \"WebApp\" [parseRoutes|\n  / HomeR GET\n|]\n\ngetHomeR = defaultLayout [whamlet|\n  <div>Hello, world!\n|]\n\nmain = warpEnv WebApp",
+    "description": "Builiding Yesod application",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "623ed6d15c92f21ac3bdfb1d",
+    "title": "Lists",
+    "language": "haskell",
+    "snippet": "list = [1, 2, 3, 4, 5]\n\nmain = do\n    print list\n\n    print $ head list\n    print $ tail list\n    print $ last list\n    print $ init list\n\n    print $ list !! 3\n    print $ elem 3 list\n",
+    "description": "Printing lists",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "623f9199b1c3b46b0d768ef0",
+    "title": "Console log",
+    "language": "javascript",
+    "snippet": "console.log(\"Hello World!\")",
+    "description": "Logging in javascript",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0,
+    "favorite": true
+  },
+  {
+    "_id": "623f949eb1c3b46b0d768f40",
+    "title": "Debug logging",
+    "language": "cs",
+    "snippet": "Debug.log(\"Hello World!\");",
+    "description": "Debug logging cs",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "623f954cb1c3b46b0d768f60",
+    "title": "Logging Ruby",
+    "language": "ruby",
+    "snippet": "require \"logger\"\r\nlogger = Logger.new(STDOUT)\r\nlogger.debug(\"Hello World!\")\r\nlogger.debug(\"Hello World!\")\r\nlogger.debug(\"Hello World!\")",
+    "description": "Log Hello World in ruby",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0,
+    "favorite": true
+  },
+  {
+    "_id": "623f9687b1c3b46b0d768fa2",
+    "title": "Logging in Go",
+    "language": "go",
+    "snippet": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"hello world\")\n}",
+    "description": "Print Hello World",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "6241d2b2dc3dfdfa9857bcd5",
+    "title": "Export loader module",
+    "language": "javascript",
+    "snippet": "export const loader: LoaderFunction = async ({ params }) => {\n  const db = await connect()\n\n  const query = await db.models.Snippets.findOne({ _id: params.snippet })\n\n  return query\n}",
+    "description": "loader from remix",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "624450f6009f4f44042f3f95",
+    "title": "Taking Space Separated Multiple Inputs",
+    "language": "python",
+    "snippet": "## Taking Two Integers as input\na,b = map(int,input().split())\nprint(\"a:\",a)\nprint(\"b:\",b)\n\n## Taking a List as input\narr = list(map(int,input().split()))\nprint(\"Input List:\",arr)",
+    "description": "This code snippet let’s you take multiple space-separated inputs at one time. This snippet will come in handy whenever you are solving a programming competition question.",
+    "updatedAt": "2022-03-30T12:45:42.524Z",
+    "__v": 0
+  },
+  {
+    "_id": "624451fb009f4f44042f3fa6",
+    "title": " Accessing Index and Value at the Same Time",
+    "language": "python",
+    "snippet": "arr = [2,4,6,3,8,10]\n\nfor index,value in enumerate(arr):\n  print(f\"At Index {index} The Value Is -> {value}\")\n\n'''Output\nAt Index 0 The Value Is -> 2\nAt Index 1 The Value Is -> 4\nAt Index 2 The Value Is -> 6\nAt Index 3 The Value Is -> 3\nAt Index 4 The Value Is -> 8\nAt Index 5 The Value Is -> 10",
+    "description": "enumerate() inbuilt function lets you access index and value at the same time within a or loop.",
+    "updatedAt": "2022-03-30T12:50:03.202Z",
+    "__v": 0
+  },
+  {
+    "_id": "624454f7009f4f44042f3fb6",
+    "title": "Check for an Anagram ----",
+    "language": "python",
+    "snippet": "def check_anagram(first_word, second_word):\n  return sorted(first_word) == sorted(second_word)\n  \nprint(check_anagram(\"silent\", \"listen\"))   # True\nprint(check_anagram(\"ginger\", \"danger\"))   # False",
+    "description": "An anagram is a word that is formed by rearranging the letters of a different word, using all the original letters exactly once.",
+    "__v": 0,
+    "updatedAt": "2022-03-30T13:03:54.402Z"
+  },
+  {
+    "_id": "6244557a009f4f44042f3fc4",
+    "title": "Square of all numbers in a given range",
+    "language": "python",
+    "snippet": "# METHOD 1\nfrom itertools import repeat\n\nn = 5\nsquares = list(map(pow, range(1, n+1), repeat(2)))\nprint(squares)\n\n# METHOD 2\nn = 6\nsquares = [i**2 for i in range(1,n+1)]\nprint(squares)\n\n\n\"\"\"Output\n  [1, 4, 9, 16, 25]\n\"\"\"",
+    "description": "In this snippet, we take the help of inbuilt function itertools to find the square of every integer in a given range.",
+    "updatedAt": "2022-03-30T13:04:58.954Z",
+    "__v": 0
+  },
+  {
+    "_id": "624455d4009f4f44042f3fcc",
+    "title": "Simple stack",
+    "language": "lua",
+    "snippet": "-- Stack Table\n-- Uses a table as stack, use <table>:push(value) and <table>:pop()\n-- Lua 5.1 compatible\n\n-- GLOBAL\nStack = {}\n\n-- Create a Table with stack functions\nfunction Stack:Create()\n\n  -- stack table\n  local t = {}\n  -- entry table\n  t._et = {}\n\n  -- push a value on to the stack\n  function t:push(...)\n    if ... then\n      local targs = {...}\n      -- add values\n      for _,v in ipairs(targs) do\n        table.insert(self._et, v)\n      end\n    end\n  end\n\n  -- pop a value from the stack\n  function t:pop(num)\n\n    -- get num values from stack\n    local num = num or 1\n\n    -- return table\n    local entries = {}\n\n    -- get values into entries\n    for i = 1, num do\n      -- get last entry\n      if #self._et ~= 0 then\n        table.insert(entries, self._et[#self._et])\n        -- remove last value\n        table.remove(self._et)\n      else\n        break\n      end\n    end\n    -- return unpacked entries\n    return unpack(entries)\n  end\n\n  -- get entries\n  function t:getn()\n    return #self._et\n  end\n\n  -- list values\n  function t:list()\n    for i,v in pairs(self._et) do\n      print(i, v)\n    end\n  end\n  return t\nend\n\n-- CHILLCODE™",
+    "description": "The following is a simple implementation of a stack via a Lua table. The function Stack:Create() will return a table with stack like functions such as pop and push. Multiple elements can be pushed/pop in a single call.",
+    "updatedAt": "2022-03-30T13:06:28.244Z",
+    "__v": 0
+  },
+  {
+    "_id": "6244572b009f4f44042f3fda",
+    "title": "fgfdsggfds",
+    "language": "coffescript",
+    "snippet": "sfdgsfgdsgdfdfgsgsfd",
+    "description": "fdgsgfdsgfds",
+    "updatedAt": "2022-03-30T13:12:11.462Z",
+    "__v": 0
+  },
+  {
+    "_id": "6244572e009f4f44042f3fdf",
+    "title": "fgfdsggfds",
+    "language": "coffescript",
+    "snippet": "sfdgsfgdsgdfdfgsgsfd",
+    "description": "fdgsgfdsgfds",
+    "updatedAt": "2022-03-30T13:12:14.844Z",
+    "__v": 0
+  }
+]

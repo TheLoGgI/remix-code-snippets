@@ -33,7 +33,7 @@ export default async function connectDb() {
       useNewUrlParser: true,
     })
     .then((connection) => {
-      // console.log("Mongoose connected in %s", NODE_ENV)
+      console.log("Mongoose connected in %s", NODE_ENV)
       return connection
     })
 

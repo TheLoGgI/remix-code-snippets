@@ -1,0 +1,31 @@
+.seed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e6e6e6;
+}
+
+.seed-view {
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.seed-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 2rem;
+}
+
+.outline {
+  background-color: initial;
+  color: black;
+  border: 0.125em solid #1a36de;
+}
+
+.outline:hover {
+  border: 0.125em solid #072cff;
+  color: white;
+}

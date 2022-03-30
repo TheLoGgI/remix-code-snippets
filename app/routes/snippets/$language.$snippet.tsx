@@ -54,7 +54,6 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function Snippet() {
   const snippet = useLoaderData<SnippetType>()
-  console.log("snippet: ", snippet)
   const [showCopy, setShowCopy] = useState(false)
 
   useEffect(() => {
@@ -94,7 +93,6 @@ export default function Snippet() {
             className="clipboard-banner"
             title="Copy to Clipboard"
             onClick={() => {
-              console.log("snippet.snippet: ", snippet.snippet)
               navigator.clipboard.writeText(snippet.snippet)
             }}
           >
