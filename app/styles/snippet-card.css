@@ -21,6 +21,10 @@
   background: rgb(227, 228, 233);
 }
 
+.snippet-card a {
+  text-decoration: none;
+}
+
 .snippet-card .description {
   font-size: 1.2rem;
   font-weight: bold;

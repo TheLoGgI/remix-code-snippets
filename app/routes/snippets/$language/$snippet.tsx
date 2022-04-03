@@ -1,18 +1,20 @@
 import ClipboardIcon from "~/components/clipboardIcon"
+import EmptyState from "~/components/emptyState"
 import StarIcon from "~/components/starIcon"
 import connect from "~/database/mongoConnection"
+import { SnippetType } from "~/types"
 import { useEffect, useState } from "react"
 import Highlight from "react-highlight"
 import {
   ActionFunction,
+  ErrorBoundaryComponent,
   Form,
   Link,
   LoaderFunction,
   redirect,
+  useCatch,
   useLoaderData,
 } from "remix"
-
-import { SnippetType } from "../snippets"
 
 export const action: ActionFunction = async ({ request }) => {
   const db = await connect()
@@ -49,6 +51,13 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   const query = await db.models.Snippets.findOne({ _id: params.snippet })
 
+  // Catch error and sent to CatchBoundary
+  if (query.length === 0) {
+    throw new Response("Not Found", {
+      status: 404,
+      statusText: "No snippets found for this language",
+    })
+  }
   return query
 }
 
@@ -124,6 +133,32 @@ export default function Snippet() {
           Edit snippet
         </Link>
       </footer>
+    </section>
+  )
+}
+
+export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  console.log("error: ", error)
+  return (
+    <section className="error-msg">
+      <div className="center">
+        <h1>Oh no, something is wrong with the snippet</h1>
+        <p>Try pick the snippet again or choose another one</p>
+        <EmptyState className="error-empty" />
+      </div>
+    </section>
+  )
+}
+
+export function CatchBoundary() {
+  const caught = useCatch()
+
+  return (
+    <section className="error-msg">
+      <div className="center">
+        <h1>{caught.statusText}</h1>
+        <EmptyState className="error-empty" />
+      </div>
     </section>
   )
 }

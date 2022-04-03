@@ -1,5 +1,6 @@
 import connect from "~/database/mongoConnection"
 import styles from "~/styles/new.css"
+import { SnippetType } from "~/types"
 import {
   ActionFunction,
   Form,
@@ -7,8 +8,6 @@ import {
   redirect,
   useLoaderData,
 } from "remix"
-
-import { SnippetType } from "../snippets"
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }]

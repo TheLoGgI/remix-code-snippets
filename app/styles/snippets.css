@@ -1,9 +1,7 @@
 .snippet-grid {
   display: grid;
-  align-items: center;
   grid-template-columns: 1fr 1px 1fr;
   gap: 2rem;
-  margin-inline: 2rem;
 }
 
 .seperator {
@@ -42,55 +40,6 @@
 .sortForm input[type="submit"] {
   display: inline-block;
   margin-left: 1rem;
-}
-
-.snippet-card {
-  display: inline-block;
-}
-.snippet-card a {
-  text-decoration: none;
-}
-
-.snippet-selected {
-  border: 1px solid #1d71de;
-  color: #1d71de;
-  transition: transform 0.2s ease-in-out;
-  transform: translateX(2rem);
-}
-.snippet-selected .snippet-card-content {
-  color: #1d71de;
-}
-
-.snippet-card-content {
-  display: grid;
-  grid-template-columns: 90% 50px;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  border: 1px solid rgb(71, 71, 71);
-  color: black;
-  width: 600px;
-}
-
-.snippet-list .snippet-list-item {
-  width: 100%;
-}
-
-.snippet-card:hover {
-  background: rgb(227, 228, 233);
-}
-
-.snippet-card .description {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.snippet-card .short-snippet {
-  overflow: hidden;
-  font-style: italic;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .snippet-section {

@@ -3,6 +3,7 @@ import React from "react"
 import { useLocation } from "react-router"
 import {
   ActionFunction,
+  ErrorBoundaryComponent,
   Form,
   Link,
   Links,
@@ -18,18 +19,28 @@ import type { MetaFunction } from "remix"
 
 import highlightStylesLight from "./styles/github.min.css"
 import styles from "./styles/main.css"
-
-export async function loader(): Promise<string[]> {
-  const db = await connect()
-  const languages = await db.models.Snippets.find().distinct("language")
-  return languages
-}
+import newpage from "./styles/new.css"
+import search from "./styles/search.css"
+import seed from "./styles/seed.css"
+import snippetCard from "./styles/snippet-card.css"
+import snippets from "./styles/snippets.css"
 
 export function links() {
   return [
     { rel: "stylesheet", href: styles },
     { rel: "stylesheet", href: highlightStylesLight },
+    { rel: "stylesheet", href: search },
+    { rel: "stylesheet", href: snippetCard },
+    { rel: "stylesheet", href: snippets },
+    { rel: "stylesheet", href: newpage },
+    { rel: "stylesheet", href: seed },
   ]
+}
+
+export async function loader(): Promise<string[]> {
+  const db = await connect()
+  const languages = await db.models.Snippets.find().distinct("language")
+  return languages
 }
 
 export const meta: MetaFunction = () => ({
@@ -40,7 +51,7 @@ export const meta: MetaFunction = () => ({
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  return redirect(`?q=${formData.get("search")}`)
+  return redirect(`snippets/search?q=${formData.get("search")}`)
 }
 
 export default function App() {
@@ -75,7 +86,7 @@ const Layout: React.FC = ({ children }) => {
   const location = useLocation()
 
   return (
-    <main>
+    <>
       <aside className="aside-nav">
         <header>
           <h1>Snippets</h1>
@@ -124,7 +135,17 @@ const Layout: React.FC = ({ children }) => {
           </Link>
         </footer>
       </aside>
-      {children}
-    </main>
+      <main>{children}</main>
+    </>
+  )
+}
+
+export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  return (
+    <Document>
+      <Layout>
+        <h1>Oh no!, Nothing Works</h1>
+      </Layout>
+    </Document>
   )
 }

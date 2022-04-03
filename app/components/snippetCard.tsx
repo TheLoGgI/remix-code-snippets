@@ -1,4 +1,4 @@
-import { SnippetType } from "~/routes/snippets"
+import { SnippetType } from "~/types"
 import { Link } from "remix"
 
 import StarIcon from "./starIcon"
@@ -10,7 +10,7 @@ const SnippetCard: React.FC<
     <div
       className={selected ? "snippet-selected snippet-card" : "snippet-card"}
     >
-      <Link to={to ? to : `${snippet.language}/${snippet._id}`}>
+      <Link to={to ?? `/snippets/${snippet.language}/${snippet._id}`}>
         <div className="snippet-card-content">
           <div className="snippet-list-item">
             <p className="description">{snippet.title}</p>

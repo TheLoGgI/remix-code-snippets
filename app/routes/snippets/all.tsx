@@ -1,4 +1,3 @@
-import EmptyState from "~/components/emptyState"
 import SnippetCard from "~/components/snippetCard"
 import connect from "~/database/mongoConnection"
 import { SnippetType } from "~/types"
@@ -7,7 +6,6 @@ import {
   LoaderFunction,
   Outlet,
   redirect,
-  useCatch,
   useFetcher,
   useLoaderData,
   useLocation,
@@ -43,22 +41,20 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     [sortQury]: 1,
   }
   // Find all snippets with the language specified in the URL
-  const query = await db.models.Snippets.find({
-    language: params.language,
-  }).sort(sortObject)
+  const query = await db.models.Snippets.find().sort(sortObject)
 
   // Catch error and sent to CatchBoundary
   if (query.length === 0 || !query) {
     throw new Response("Not Found", {
       status: 404,
-      statusText: "No snippets found for this language",
+      statusText: "No snippets found",
     })
   }
 
   return { params, query }
 }
 
-export default function Snippets() {
+export default function All() {
   const { query: snippets } = useLoaderData<LoaderDataType>()
   const fetcher = useFetcher()
   const location = useLocation()
@@ -67,7 +63,7 @@ export default function Snippets() {
     <section className="snippet-grid">
       <div className="snippets-view">
         <header>
-          <h2>{snippets[0].language}</h2>
+          <h2>Snippets of languages</h2>
           <fetcher.Form method="post" className="sortForm">
             <select
               title="sort snippets"
@@ -100,19 +96,6 @@ export default function Snippets() {
       </div>
       <div className="seperator"></div>
       <Outlet />
-    </section>
-  )
-}
-
-export function CatchBoundary() {
-  const caught = useCatch()
-
-  return (
-    <section className="error-msg">
-      <div className="center">
-        <h1>{caught.statusText}</h1>
-        <EmptyState className="error-empty" />
-      </div>
     </section>
   )
 }

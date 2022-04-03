@@ -1,6 +1,5 @@
-import fs from "fs"
-
 import connect from "~/database/mongoConnection"
+import seedJsonData from "~/database/seed.json"
 import {
   ActionFunction,
   Form,
@@ -10,25 +9,16 @@ import {
   useLoaderData,
 } from "remix"
 
-// TypeError: Converting circular structure to JSON
-import seedJsonData from "../database/seed.json"
-import styles from "../styles/seed.css"
-
-// Error: ENOENT: no such file or directory, open '../database/seed.json'
-// const seedData = fs.readFileSync("../database/seed.json", "utf8")
-
-// TypeError: Converting circular structure to JSON
-
 type SeedLoaderType = Record<"seedCount" | "snippetCount", number>
-
-export function links() {
-  return [{ rel: "stylesheet", href: styles }]
-}
 
 export const action: ActionFunction = async () => {
   const db = await connect()
-  db.models.Snippets.deleteMany({})
-  db.models.Snippets.insertMany(seedJsonData)
+  try {
+    await db.models.Snippets.deleteMany()
+    await db.models.Snippets.insertMany(seedJsonData)
+  } catch (error) {
+    throw error
+  }
   return redirect("/snippets")
 }
 
@@ -36,7 +26,7 @@ export const loader: LoaderFunction = async () => {
   const db = await connect()
 
   return {
-    snippetCount: db.models.Snippets.countDocuments(),
+    snippetCount: await db.models.Snippets.countDocuments(),
     seedCount: seedJsonData.length,
   }
 }
@@ -52,7 +42,7 @@ export default function Seed() {
         </p>
         <p>Do you want to seed the database with {seedCount} snippets</p>
         <div className="seed-actions">
-          <Form>
+          <Form method="post">
             <button className="btn" type="submit">
               Seed
             </button>

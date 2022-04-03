@@ -2,12 +2,6 @@ import connect from "~/database/mongoConnection"
 import React from "react"
 import { ActionFunction, Form, redirect } from "remix"
 
-import styles from "../styles/new.css"
-
-export function links() {
-  return [{ rel: "stylesheet", href: styles }]
-}
-
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
 

@@ -10,6 +10,8 @@
   display: flex;
   flex-flow: column nowrap;
   height: 100vh;
+  position: fixed;
+  width: max(200px, 10%);
 }
 
 .input-search {
@@ -102,6 +104,7 @@ main {
   font-family: system-ui, sans-serif;
   font-size: 1.2rem;
   line-height: 1.4;
-  display: grid;
-  grid-template-columns: 16% 1fr;
+  margin-inline-start: max(15rem, 12%);
+  margin-inline-end: 2rem;
+  padding-block: 2rem;
 }
