@@ -6,40 +6,33 @@ export type Snippet = {
   snippet: string
   description: string
   favorite: boolean
-  createdAt: Date
-  updatedAt: Date
 }
 
-const snippet = new Schema<Snippet>({
-  title: {
-    type: String,
-    required: true,
+const snippet = new Schema<Snippet>(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    language: {
+      type: String,
+      required: true,
+    },
+    snippet: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    favorite: {
+      type: Boolean,
+      required: false,
+    },
   },
-  language: {
-    type: String,
-    required: true,
-  },
-  snippet: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  favorite: {
-    type: Boolean,
-    required: false,
-  },
-  createdAt: {
-    type: Date,
-    required: false,
-  },
-  updatedAt: {
-    type: Date,
-    required: false,
-  },
-})
+  { timestamps: true }
+)
 
 // export const SnippetModel: Model<Snippet> = new Model("Snippet", snippet)
 export const models = [
