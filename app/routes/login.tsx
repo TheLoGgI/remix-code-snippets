@@ -9,6 +9,12 @@ import {
   useLoaderData,
 } from "remix"
 
+import styles from "../styles/login.css"
+
+export function links() {
+  return [{ rel: "stylesheet", href: styles }]
+}
+
 export const action: ActionFunction = async ({ request }) => {
   const cookieSession = await getSession(request.headers.get("Cookie"))
 
@@ -37,9 +43,13 @@ export default function New() {
   }, [])
 
   return (
-    <section className="signin">
+    <section className="signin center">
       <pre>{JSON.stringify(cookies, null, 2)}</pre>
       <Form method="post" reloadDocument>
+        <label htmlFor="username">Username</label>
+        <input type="text" name="username" id="username" value="" />
+        <label htmlFor="password">Password</label>
+        <input type="password" name="password" value="" />
         <input type="submit" value="reload page" />
       </Form>
     </section>

@@ -82,6 +82,14 @@ export default function Snippets() {
   const fetcher = useFetcher()
   const location = useLocation()
 
+  if (snippets === undefined || snippets.length === 0) {
+    return <h2>Loading...</h2>
+  }
+
+  // function handleChange(event) {
+  //   submit(event.currentTarget, { replace: true })
+  // }
+
   return (
     <section className="snippet-grid">
       <div className="snippets-view">

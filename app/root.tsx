@@ -108,6 +108,7 @@ const Layout: React.FC = ({ children }) => {
                 key={language}
                 to={`/snippets/${language}`}
                 className={
+                  // navLink react router
                   new RegExp(`/${language}`).test(location.pathname)
                     ? "active"
                     : ""
